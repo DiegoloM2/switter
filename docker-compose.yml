@@ -1,0 +1,22 @@
+version: '3.7'
+services: 
+    web:
+        build: .
+        command: python /project/manage.py runserver 0.0.0.0:8000
+        volumes: 
+            - .:/project
+        ports: 
+            - 8000:8000
+        depends_on:
+            - db
+        
+    db: 
+        image: postgres
+        volumes: 
+            - project_database:/var/lib/postgresql/data/
+        environment: 
+            POSTGRES_PASSWORD: ".j.XAWe:GF{2H^;2_"
+
+volumes: 
+    project_database:
+        
