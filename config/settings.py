@@ -42,6 +42,11 @@ INSTALLED_APPS = [
 
     #Local Apps
     'users.apps.UsersConfig',
+
+    #Third party apps
+    'allauth', 
+    'allauth.account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -59,7 +64,7 @@ ROOT_URLCONF = 'config.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [f"{BASE_DIR}/templates"],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -135,3 +140,22 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 #Custom User:
 
 AUTH_USER_MODEL = 'users.CustomUser'
+
+#Advance User Registration
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = (
+'django.contrib.auth.backends.ModelBackend',
+'allauth.account.auth_backends.AuthenticationBackend', # used when django attempts to authenticate a user
+)
+# ensures that emails sent by 'allauth' aren't sent (since no have email server yet) but printed in the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+ACCOUNT_LOGOUT_REDIRECT = 'home' # for allauth logout to point to home
+
+ACCOUNT_USERNAME_REQUIRED = False # new
+ACCOUNT_AUTHENTICATION_METHOD = 'email' # new
+ACCOUNT_EMAIL_REQUIRED = True # new
+ACCOUNT_UNIQUE_EMAIL = True # new
+ACCOUNT_FORMS = {'signup': 'users.forms.CustomUserCreationForm'}
