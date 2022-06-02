@@ -13,7 +13,7 @@ class CustomUserAdmin(UserAdmin):
     list_display = ('email', 'date_joined', "last_login", "is_admin", "is_staff",)
 
     #Then create the search fields you want.
-    search_field = ("email",)
+    search_fields = ("email",)
 
     readonly_fields = ('date_joined', "last_login",)
 
