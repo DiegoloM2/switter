@@ -19,3 +19,14 @@ class NewsTweet(models.Model):
         permissions = [
             ('create_permission', 'Can write news tweets'),
         ]
+
+class NewsComment(models.Model):
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
+    tweet = models.ForeignKey(NewsTweet, on_delete = models.CASCADE)
+    text = models.CharField(max_length = 200)
+
+class OpinionComment(models.Model):
+    author = models.ForeignKey(User, on_delete = models.CASCADE)
+    tweet = models.ForeignKey(OpinionTweet, on_delete = models.CASCADE)
+    text = models.CharField(max_length = 200)
+ 
