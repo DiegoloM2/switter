@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin
 from django.urls import reverse
 
 import uuid
@@ -38,7 +38,7 @@ class CustomUserManager(BaseUserManager):
 #tokenized password resets.
 
 
-class CustomUser(AbstractBaseUser): 
+class CustomUser(AbstractBaseUser, PermissionsMixin): 
 
     #We want a custom id because an auto increasing id is a security liability since it 
     # gives hackers database information
@@ -76,7 +76,7 @@ class CustomUser(AbstractBaseUser):
         return self.is_admin
     
     def has_module_perms(self, app_label): #gets module permissions
-        return True
+        return self.is_admin
 
     def get_absolute_url(self):
         return reverse("profile", args = [str(self.id)])

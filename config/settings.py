@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     #Local Apps
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'tweets.apps.TweetsConfig',
 
     #Third party apps
     'allauth', 
@@ -160,6 +161,7 @@ ACCOUNT_AUTHENTICATION_METHOD = 'email' # new
 ACCOUNT_EMAIL_REQUIRED = True # new
 ACCOUNT_UNIQUE_EMAIL = True # new
 ACCOUNT_FORMS = {'signup': 'users.forms.CustomUserCreationForm'}
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 
 
 import os
